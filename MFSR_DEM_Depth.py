@@ -2,17 +2,17 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from model_MCANet.MCAM import MCAM
-from model_MCANet.ASPP import ASPP
-from model_MCANet.ResNet import resnet101
+from model_MFSR.MCAM import MCAM
+from model_MFSR.ASPP import ASPP
+from model_MFSR.ResNet import resnet101
 from models.common import *
 
 def conv1x1(in_planes, out_planes, stride=1):
     return nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=stride, bias=False)
 
-class MACANet(nn.Module):
+class MFSR(nn.Module):
     def __init__(self, pretrained = True, backbone = 'ResNet101', att_type=None, num_feats = 32, kernel_size = 3, scale = 4):
-        super(MACANet, self).__init__()
+        super(MFSR, self).__init__()
         # print(num_classes)
         self.bicubic = nn.Upsample(scale_factor=scale, mode='bicubic')
         self.encoder = EncoderBlock(pretrained, backbone, att_type=att_type)
@@ -129,7 +129,7 @@ if __name__ == '__main__':
     # width = (720 // upscale // window_size + 1) * window_size
     height = 255
     width = 255
-    model = MACANet(num_feats=32, kernel_size=3, scale=upscale)
+    model = MFSR(num_feats=32, kernel_size=3, scale=upscale)
     print(model)
 
     lr = torch.randn(8, 1, 64, 64)
