@@ -2,10 +2,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from model_MFSR.MCAM import MCAM
-from model_MFSR.ASPP import ASPP
-from model_MFSR.ResNet import resnet101
-from models.common import *
+from MCAM import MCAM
+from ASPP import ASPP
+from ResNet import resnet101
+from common import *
 
 def conv1x1(in_planes, out_planes, stride=1):
     return nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=stride, bias=False)
